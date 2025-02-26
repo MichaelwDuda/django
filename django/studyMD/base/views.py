@@ -18,7 +18,7 @@ from django.db.models import Q
 def loginPage(request):
 
     if request.method == 'POST':
-        username = request.POST.get('usernaem')
+        username = request.POST.get('username')
         password = request.POST.get('password')
 
         try:
@@ -35,6 +35,12 @@ def loginPage(request):
             messages.error(request, 'Username OR password does not exist')
     context={}
     return render(request, 'base/login_register.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
